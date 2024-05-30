@@ -7,7 +7,7 @@ import React from "react";
 
 interface TabsProps {
   selected: string;
-  tabsMapping: any;
+  tabsMapping: TabsType[];
   setSelected: (text: string) => void;
 }
 

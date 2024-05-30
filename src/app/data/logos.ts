@@ -1,4 +1,4 @@
-const logos = [
+export const logos = [
   {
     name: "Vercel",
     url: "https://res.cloudinary.com/dfhp33ufc/image/upload/v1715881430/vercel_wordmark_dark_mhv8u8.svg",
@@ -36,39 +36,3 @@ const logos = [
     url: "https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/tyos2ayezryjskox3wzs.svg",
   },
 ];
-
-const AnimatedLogoCloud = () => {
-  return (
-    <div className="w-full">
-      <div className="mx-auto w-full px-4 md:px-8">
-        <div
-          className="group mt-6 flex gap-6 overflow-hidden p-2"
-          style={{
-            maskImage:
-              "linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 95%)",
-          }}
-        >
-          {Array(5)
-            .fill(null)
-            .map((_, i) => (
-              <div
-                key={`container-${i}`}
-                className="flex shrink-0 animate-logo-cloud flex-row justify-around gap-6"
-              >
-                {logos.map((logo, j) => (
-                  <img
-                    key={`logo-${i}-${j}`}
-                    src={logo.url}
-                    className="h-10 w-28 px-2 brightness-0"
-                    alt={`${logo.name}`}
-                  />
-                ))}
-              </div>
-            ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default AnimatedLogoCloud;

@@ -2,6 +2,7 @@
 
 import AnimatedLogoCloud from "@/components/AnimatedCloud";
 import Tabs from "@/components/Tabs";
+import { logos } from "@/data/logos";
 import { TabsEnum, tabs } from "@/models/tabs";
 import { useState } from "react";
 
@@ -13,7 +14,7 @@ export default function Home() {
       case TabsEnum.REWARDS:
         return (
           <div>
-            <AnimatedLogoCloud />;
+            <AnimatedLogoCloud logos={logos} />
           </div>
         );
       case TabsEnum.SCAN:
