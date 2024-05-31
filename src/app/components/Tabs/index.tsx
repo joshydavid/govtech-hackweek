@@ -42,7 +42,7 @@ const Tab = ({ icon, text, selected, setSelected }: TabProp) => {
       onClick={() => setSelected(text)}
       className={cn(
         selected ? "text-white" : "text-gray-500 hover:text-gray-900",
-        "relative rounded-md px-3.5 py-2.5 text-lg font-medium transition-colors"
+        "relative rounded-md px-3.5 py-2.5 text-lg font-medium transition-colors",
       )}
     >
       <div className="flex flex-col gap-1 justify-center items-center relative z-10">
