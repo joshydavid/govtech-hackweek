@@ -29,17 +29,13 @@ export default function Home() {
     switch (selected) {
       case TabsEnum.REWARDS:
         return (
-          <h1 className="font-semibold text-3xl text-left">
+          <h1 className="text-left text-3xl font-semibold">
             {TabsEnum.REWARDS}
           </h1>
         );
-      case TabsEnum.SCAN:
-        return (
-          <h1 className="font-semibold text-3xl text-left">{TabsEnum.SCAN}</h1>
-        );
       case TabsEnum.PROFILE:
         return (
-          <h1 className="font-semibold text-3xl text-left">
+          <h1 className="text-left text-3xl font-semibold">
             {TabsEnum.PROFILE}
           </h1>
         );
@@ -48,10 +44,10 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center p-8 overflow-hidden">
+    <main className="relative flex min-h-screen flex-col items-center overflow-hidden p-8">
       <div className="flex w-full justify-start">{renderHeader()}</div>
       <div className="mt-8">{renderContent()}</div>
-      <div className="items-center absolute bottom-0">
+      <div className="absolute bottom-0 items-center">
         <Tabs
           tabsMapping={tabs}
           selected={selected}
