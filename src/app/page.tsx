@@ -18,7 +18,7 @@ export default function Home() {
           </div>
         );
       case TabsEnum.SCAN:
-        return <div>Render Camera</div>;
+        return <div>Render Scan</div>;
       case TabsEnum.PROFILE:
         return <div>Profile Content</div>;
       default:
@@ -32,6 +32,10 @@ export default function Home() {
           <h1 className="text-left text-3xl font-semibold">
             {TabsEnum.REWARDS}
           </h1>
+        );
+      case TabsEnum.SCAN:
+        return (
+          <h1 className="text-left text-3xl font-semibold">{TabsEnum.SCAN}</h1>
         );
       case TabsEnum.PROFILE:
         return (

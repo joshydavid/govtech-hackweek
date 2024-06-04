@@ -45,7 +45,7 @@ const Tab = ({ icon, text, selected, setSelected }: TabProp) => {
         "relative rounded-md px-3.5 py-2.5 text-lg font-medium transition-colors",
       )}
     >
-      <div className="flex flex-col gap-1 justify-center items-center relative z-10">
+      <div className="relative z-10 flex flex-col items-center justify-center gap-1">
         {React.createElement(icon)}
         <span>{text}</span>
       </div>
