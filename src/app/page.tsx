@@ -1,21 +1,22 @@
 "use client";
 
 import AnimatedLogoCloud from "@/components/AnimatedCloud";
-import { Camera } from "@/components/Camera";
 import Tabs from "@/components/Tabs";
 import { logos } from "@/data/logos";
 import { TabsEnum, tabs } from "@/models/tabs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import Camera from "./components/Camera";
+import { NavigationContext } from "./context/NavigationContext";
 
 export default function Home() {
-  const [selected, setSelected] = useState<string>(tabs[0].label);
-  const [openCamera, setOpenCamera] = useState<boolean>(false);
+  const { selected, setSelected } = useContext(NavigationContext);
+  const { openCamera, setOpenCamera } = useContext(NavigationContext);
 
   useEffect(() => {
     if (selected === TabsEnum.SCAN) {
       setOpenCamera(true);
     }
-  }, [selected]);
+  }, [selected, setOpenCamera]);
 
   const renderContent = () => {
     switch (selected) {
@@ -26,11 +27,7 @@ export default function Home() {
           </div>
         );
       case TabsEnum.SCAN:
-        return (
-          <div>
-            <Camera />
-          </div>
-        );
+        return <Camera />;
       case TabsEnum.PROFILE:
         return <div>Profile Content</div>;
       default:
