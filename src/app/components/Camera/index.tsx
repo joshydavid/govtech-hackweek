@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useContext, useRef, useState } from "react";
 import { Camera as ReactCamera } from "react-camera-pro";
 import { GrPowerReset } from "react-icons/gr";
-import { MdOutlineCamera } from "react-icons/md";
 
 export default function Camera() {
   const camera = useRef<any>(null);
@@ -31,7 +30,7 @@ export default function Camera() {
   };
 
   return (
-    <div className="mx-auto flex max-h-screen w-screen flex-col justify-center">
+    <div className="mx-auto flex max-h-screen w-screen flex-col justify-center bg-black">
       {!image && (
         <ReactCamera
           ref={camera}
@@ -48,14 +47,16 @@ export default function Camera() {
         <span></span>
         {!image && (
           <>
-            <div className="flex justify-center">
-              <MdOutlineCamera
-                size={40}
-                color="#FFFFFF"
-                onClick={handleCamera}
-              />
+            <div
+              className="relative flex items-center justify-center"
+              onClick={handleCamera}
+            >
+              <div className="absolute flex h-24 w-24 items-center justify-center rounded-full">
+                <div className="h-16 w-16 rounded-full bg-white"></div>
+              </div>
+              <div className="border-1 relative z-10 h-14 w-14 rounded-full border-2 border-black bg-white"></div>
             </div>
-            <p className="text-white" onClick={handleReset}>
+            <p className="text-sm text-white" onClick={handleReset}>
               Cancel
             </p>
           </>
@@ -64,13 +65,13 @@ export default function Camera() {
           <>
             <div className="flex justify-center">
               <GrPowerReset
-                size={35}
-                color="#FFFFFF"
+                size={60}
                 onClick={() => setImage(null)}
+                className="rounded-full bg-white p-1.5"
               />
             </div>
             <div>
-              <Button variant="white" onClick={handleSubmit}>
+              <Button variant="white" onClick={handleSubmit} size="sm">
                 Submit
               </Button>
             </div>

@@ -43,10 +43,6 @@ export default function Home() {
             {TabsEnum.REWARDS}
           </h1>
         );
-      case TabsEnum.SCAN:
-        return (
-          <h1 className="text-left text-3xl font-semibold">{TabsEnum.SCAN}</h1>
-        );
       case TabsEnum.PROFILE:
         return (
           <h1 className="text-left text-3xl font-semibold">
