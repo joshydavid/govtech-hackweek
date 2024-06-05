@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import { NavigationContext } from "@/context/NavigationContext";
 import { errMessages } from "@/errorMessages/errMessages";
 import { tabs } from "@/models/tabs";
@@ -24,6 +25,11 @@ export default function Camera() {
     setImage(capture);
   };
 
+  const handleSubmit = () => {
+    setOpenCamera(false);
+    setSelected(tabs[3].label);
+  };
+
   return (
     <div className="mx-auto flex max-h-screen w-screen flex-col justify-center">
       {!image && (
@@ -38,7 +44,7 @@ export default function Camera() {
           <Image src={image} alt="Photo" fill={true} />
         </div>
       )}
-      <div className="absolute bottom-0 mx-auto grid w-full grid-cols-3 items-center justify-center bg-black p-4 text-center">
+      <div className="fixed bottom-0 mx-auto grid w-full grid-cols-3 items-center justify-center bg-black p-8 text-center">
         <span></span>
         {!image && (
           <>
@@ -55,13 +61,20 @@ export default function Camera() {
           </>
         )}
         {image && (
-          <div className="flex justify-center">
-            <GrPowerReset
-              size={40}
-              color="#FFFFFF"
-              onClick={() => setImage(null)}
-            />
-          </div>
+          <>
+            <div className="flex justify-center">
+              <GrPowerReset
+                size={35}
+                color="#FFFFFF"
+                onClick={() => setImage(null)}
+              />
+            </div>
+            <div>
+              <Button variant="white" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </div>

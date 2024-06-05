@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Healthy 365",
-  description: "Healthy 365 - v2.0",
+  title: "Scan",
+  description: "Team Scan - GovTech Hackweek 2024",
 };
 
 export default function RootLayout({

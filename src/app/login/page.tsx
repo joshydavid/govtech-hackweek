@@ -1,12 +1,15 @@
 "use client";
 
 import { Button } from "@/components/Button";
+import { LANDING_PAGE } from "@/constant";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Singpass from "~/singpass.svg";
 
 export default function Login() {
+  const router = useRouter();
   const handleLogin = () => {
-    return;
+    router.push(LANDING_PAGE);
   };
 
   return (

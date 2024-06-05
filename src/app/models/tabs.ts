@@ -4,6 +4,7 @@ export enum TabsEnum {
   REWARDS = "Rewards",
   SCAN = "Scan",
   PROFILE = "Profile",
+  VERIFICATION = "Verification",
 }
 
 export interface TabsType {
@@ -22,6 +23,10 @@ export const tabs: TabsType[] = [
   },
   {
     label: TabsEnum.PROFILE,
+    icon: TbUser,
+  },
+  {
+    label: TabsEnum.VERIFICATION,
     icon: TbUser,
   },
 ];

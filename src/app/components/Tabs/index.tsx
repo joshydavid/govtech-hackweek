@@ -20,18 +20,20 @@ interface TabProp {
 
 const Tabs = ({ tabsMapping, selected, setSelected }: TabsProps) => {
   return (
-    <div className="mb-8 flex items-center gap-12">
-      {tabsMapping.map(({ label, icon }: TabsType, index: number) => {
-        return (
-          <Tab
-            text={label}
-            icon={icon}
-            selected={selected === label}
-            setSelected={setSelected}
-            key={index}
-          />
-        );
-      })}
+    <div className="flex w-screen items-center justify-center gap-12 bg-white p-4">
+      {tabsMapping
+        .slice(0, tabsMapping.length - 1)
+        .map(({ label, icon }: TabsType, index: number) => {
+          return (
+            <Tab
+              text={label}
+              icon={icon}
+              selected={selected === label}
+              setSelected={setSelected}
+              key={index}
+            />
+          );
+        })}
     </div>
   );
 };
@@ -42,7 +44,7 @@ const Tab = ({ icon, text, selected, setSelected }: TabProp) => {
       onClick={() => setSelected(text)}
       className={cn(
         selected ? "text-white" : "text-gray-500 hover:text-gray-900",
-        "relative rounded-md px-3.5 py-2.5 text-lg font-medium transition-colors",
+        "relative rounded-md px-3.5 py-2.5 text-sm font-medium transition-colors",
       )}
     >
       <div className="relative z-10 flex flex-col items-center justify-center gap-1">
