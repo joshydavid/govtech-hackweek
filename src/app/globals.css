@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .h1-special {
+    @apply fixed top-0 z-10 w-screen bg-white px-6 py-8 text-left text-3xl font-semibold;
+  }
+}

@@ -25,6 +25,16 @@ export default function Home() {
         return (
           <div>
             <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
+            <AnimatedLogoCloud logos={logos} />
           </div>
         );
       case TabsEnum.SCAN:
@@ -38,24 +48,14 @@ export default function Home() {
   const renderHeader = () => {
     switch (selected) {
       case TabsEnum.REWARDS:
-        return (
-          <h1 className="fixed top-10 text-left text-3xl font-semibold">
-            {TabsEnum.REWARDS}
-          </h1>
-        );
+        return <h1 className="h1-special">{TabsEnum.REWARDS}</h1>;
       case TabsEnum.PROFILE:
-        return (
-          <h1 className="fixed top-10 text-left text-3xl font-semibold">
-            {TabsEnum.PROFILE}
-          </h1>
-        );
+        return <h1 className="h1-special">{TabsEnum.PROFILE}</h1>;
       case TabsEnum.VERIFICATION:
         return (
           <div>
-            <h1 className="fixed top-10 text-left text-3xl font-semibold">
-              {TabsEnum.VERIFICATION}
-            </h1>
-            <div className="mt-16 flex">
+            <h1 className="h1-special">{TabsEnum.VERIFICATION}</h1>
+            <div className="mt-20 flex pl-6">
               {/* render info here */}
               <Button onClick={() => setSelected(TabsEnum.SCAN)}>Retake</Button>
             </div>
@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <main className="relative flex min-h-screen flex-col items-center overflow-hidden p-8">
-      <div className="flex w-full justify-start">{renderHeader()}</div>
+      <div className="flex w-screen">{renderHeader()}</div>
       <div className="mt-16 flex-grow">{renderContent()}</div>
       <div className="fixed bottom-0 flex w-full justify-center">
         {!openCamera && selected !== TabsEnum.VERIFICATION && (
