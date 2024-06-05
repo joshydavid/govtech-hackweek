@@ -5,7 +5,7 @@ import { tabs } from "@/models/tabs";
 import Image from "next/image";
 import { useContext, useRef, useState } from "react";
 import { Camera as ReactCamera } from "react-camera-pro";
-import { GrPowerReset } from "react-icons/gr";
+import { MdDelete } from "react-icons/md";
 
 export default function Camera() {
   const camera = useRef<any>(null);
@@ -64,10 +64,10 @@ export default function Camera() {
         {image && (
           <>
             <div className="flex justify-center">
-              <GrPowerReset
+              <MdDelete
                 size={60}
                 onClick={() => setImage(null)}
-                className="rounded-full bg-white p-1.5"
+                className="rounded-full bg-white p-3"
               />
             </div>
             <div>

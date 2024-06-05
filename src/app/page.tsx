@@ -39,23 +39,23 @@ export default function Home() {
     switch (selected) {
       case TabsEnum.REWARDS:
         return (
-          <h1 className="text-left text-3xl font-semibold">
+          <h1 className="fixed top-10 text-left text-3xl font-semibold">
             {TabsEnum.REWARDS}
           </h1>
         );
       case TabsEnum.PROFILE:
         return (
-          <h1 className="text-left text-3xl font-semibold">
+          <h1 className="fixed top-10 text-left text-3xl font-semibold">
             {TabsEnum.PROFILE}
           </h1>
         );
       case TabsEnum.VERIFICATION:
         return (
           <div>
-            <h1 className="text-left text-3xl font-semibold">
+            <h1 className="fixed top-10 text-left text-3xl font-semibold">
               {TabsEnum.VERIFICATION}
             </h1>
-            <div className="mt-4 flex">
+            <div className="mt-16 flex">
               {/* render info here */}
               <Button onClick={() => setSelected(TabsEnum.SCAN)}>Retake</Button>
             </div>
@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col items-center overflow-hidden p-8">
       <div className="flex w-full justify-start">{renderHeader()}</div>
-      <div className="mt-8 flex-grow">{renderContent()}</div>
+      <div className="mt-16 flex-grow">{renderContent()}</div>
       <div className="fixed bottom-0 flex w-full justify-center">
         {!openCamera && selected !== TabsEnum.VERIFICATION && (
           <Tabs
