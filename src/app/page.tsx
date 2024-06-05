@@ -4,10 +4,19 @@ import AnimatedLogoCloud from "@/components/AnimatedCloud";
 import Tabs from "@/components/Tabs";
 import { logos } from "@/data/logos";
 import { TabsEnum, tabs } from "@/models/tabs";
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import Camera from "./components/Camera";
+import { NavigationContext } from "./context/NavigationContext";
 
 export default function Home() {
-  const [selected, setSelected] = useState<string>(tabs[0].label);
+  const { selected, setSelected } = useContext(NavigationContext);
+  const { openCamera, setOpenCamera } = useContext(NavigationContext);
+
+  useEffect(() => {
+    if (selected === TabsEnum.SCAN) {
+      setOpenCamera(true);
+    }
+  }, [selected, setOpenCamera]);
 
   const renderContent = () => {
     switch (selected) {
@@ -18,7 +27,7 @@ export default function Home() {
           </div>
         );
       case TabsEnum.SCAN:
-        return <div>Render Scan</div>;
+        return <Camera />;
       case TabsEnum.PROFILE:
         return <div>Profile Content</div>;
       default:
@@ -52,11 +61,13 @@ export default function Home() {
       <div className="flex w-full justify-start">{renderHeader()}</div>
       <div className="mt-8">{renderContent()}</div>
       <div className="absolute bottom-0 items-center">
-        <Tabs
-          tabsMapping={tabs}
-          selected={selected}
-          setSelected={setSelected}
-        />
+        {!openCamera && (
+          <Tabs
+            tabsMapping={tabs}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        )}
       </div>
     </main>
   );
