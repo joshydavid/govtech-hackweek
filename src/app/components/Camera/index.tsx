@@ -1,14 +1,16 @@
+"use client";
+
+import { backendAxiosPost } from "@/api";
 import { Button } from "@/components/Button";
 import { NavigationContext } from "@/context/NavigationContext";
 import { errMessages } from "@/errorMessages/errMessages";
+import { base64ToFile, processUploadAndReturnDownloadUrl } from "@/helper";
 import { tabs } from "@/models/tabs";
 import Image from "next/image";
 import { useContext, useRef, useState } from "react";
 import { Camera as ReactCamera } from "react-camera-pro";
 import { RxCross1 } from "react-icons/rx";
-
-import { backendAxiosPost } from "@/api";
-import { type PutBlobResult } from "@vercel/blob";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Camera() {
   const camera = useRef<any>(null);
@@ -18,6 +20,7 @@ export default function Camera() {
   const { setOpenCamera } = useContext(NavigationContext);
   const { setReceiptData } = useContext(NavigationContext);
   const [files, setFiles] = useState<any>();
+  const [uploading, setUploading] = useState<boolean>(false);
 
   const handleReset = () => {
     setImage(null);
@@ -25,49 +28,36 @@ export default function Camera() {
     setSelected(tabs[0].label);
   };
 
+  const getTime = () => {
+    return new Date().getTime();
+  };
+
   const handleCamera = () => {
     const capture = camera.current.takePhoto();
     setImage(capture);
     setCapturedImage(capture);
-
-    const file = base64ToFile(capture, "capture.png");
+    const file = base64ToFile(capture, `capture-${getTime()}.png`);
     setFiles(file);
   };
 
   const handleSubmit = async () => {
+    setUploading(true);
+    const downloadUrl = await processUploadAndReturnDownloadUrl(files);
+    const result = await handleProcessData(downloadUrl);
+    if (result.status === 201) {
+      setReceiptData(result.data);
+    }
     setOpenCamera(false);
     setSelected(tabs[2].label);
-    processUpload();
+    setUploading(false);
   };
 
-  const processUpload = () => {
-    const UPLOAD_API_ROUTE = "/api/upload";
-    fetch(UPLOAD_API_ROUTE, {
-      method: "POST",
-      headers: { "content-type": files?.type || "application/octet-stream" },
-      body: files,
-    }).then(async (res) => {
-      if (res.status === 200) {
-        const { url } = (await res.json()) as PutBlobResult;
-        const apiRoute = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/${process.env.NEXT_PUBLIC_QUERY}`;
-        const response = await backendAxiosPost(apiRoute, { imageUrl: url });
-        if (response.status === 201) {
-          setReceiptData(response.data);
-        }
-      }
+  const handleProcessData = async (downloadUrl: string) => {
+    const apiRoute = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/${process.env.NEXT_PUBLIC_QUERY}`;
+    const response = await backendAxiosPost(apiRoute, {
+      imageUrl: downloadUrl,
     });
-  };
-
-  const base64ToFile = (base64String: string, fileName: string) => {
-    const byteString = atob(base64String.split(",")[1]);
-    const mimeString = base64String.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ab], { type: mimeString });
-    return new File([blob], fileName, { type: mimeString });
+    return response;
   };
 
   const renderCaptureAndCancelButton = () => {
@@ -105,16 +95,13 @@ export default function Camera() {
         >
           Cancel
         </Button>
-
         <span></span>
-
-        <Button
-          variant="ghost"
-          onClick={handleSubmit}
-          size="sm"
-          className="text-white"
-        >
-          Confirm
+        <Button variant="ghost" onClick={handleSubmit} disabled={uploading}>
+          {uploading ? (
+            <ClipLoader color="white" size="40" speedMultiplier={0.5} />
+          ) : (
+            <p className="text-white">Confirm</p>
+          )}
         </Button>
       </>
     );

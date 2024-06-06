@@ -10,7 +10,7 @@ export const HowItWorks = [
   },
   {
     id: 2,
-    instruction: "Scan the receipt to earn points",
+    instruction: "Scan receipt to earn points",
     image: HeroTwo,
   },
   {

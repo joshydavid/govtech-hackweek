@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { FaGift, FaHeart } from "react-icons/fa";
+import { IoIosWarning } from "react-icons/io";
 import { Button } from "./components/Button";
 import Camera from "./components/Camera";
 import { REWARD_PAGE } from "./constant";
@@ -18,7 +19,6 @@ export default function Home() {
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
   const { userInfo } = useContext(NavigationContext);
   const { receiptData } = useContext(NavigationContext);
-
   const router = useRouter();
 
   const handleSubmission = () => {
@@ -54,11 +54,11 @@ export default function Home() {
               </div>
             </div>
 
-            <h3 className="text-h3 my-8 pl-16 font-bold">How it works</h3>
-            <div className="flex flex-col gap-12 px-16 pb-28 lg:flex-row lg:justify-evenly lg:gap-4 lg:p-12 lg:pb-60">
+            <h3 className="my-8 pl-8 font-bold">How it works</h3>
+            <div className="flex flex-col gap-12 px-8 pb-28 lg:flex-row lg:justify-evenly lg:gap-4 lg:p-12 lg:pb-60">
               {HowItWorks.map(({ id, instruction, image }) => (
                 <div
-                  className="flex flex-col items-start gap-3 rounded-lg bg-white p-8"
+                  className="flex flex-col items-start justify-center gap-3 rounded-lg bg-white p-8 text-center"
                   key={id}
                 >
                   <div className="mb-4 flex min-h-[200px] justify-center">
@@ -76,6 +76,8 @@ export default function Home() {
     }
   };
 
+  const disabledCondition = receiptData?.lineItems?.length <= 0;
+
   const renderHeader = () => {
     switch (selected) {
       case TabsEnum.REWARDS:
@@ -88,33 +90,72 @@ export default function Home() {
       case TabsEnum.VERIFICATION:
         return (
           <div>
-            <div className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-center text-lg font-semibold text-white">
-              <p>
-                Healthier Choices Spotted <span className="pl-2">🥬</span>
-              </p>
+            <div className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-left text-lg font-semibold text-white">
+              {receiptData?.lineItems?.length > 0 ? (
+                <p>My Purchases</p>
+              ) : (
+                <p>Something Went Wrong</p>
+              )}
             </div>
             <div
               className={cn(
-                "mx-auto mt-20 flex w-screen flex-col items-center justify-center gap-8",
+                "mx-auto mt-24 flex w-screen flex-col items-center justify-center gap-8",
               )}
             >
-              <div className="rounded-2xl bg-gray-100 p-6">
-                <ul className="list-none divide-y-[1px] divide-black leading-8">
-                  {receiptData?.lineItems?.map((item: string) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+              {receiptData?.lineItems?.length > 0 && (
+                <div className="font-semibold">
+                  {receiptData?.acceptedLineItems?.length > 0 ? (
+                    <p className="animate-bounce text-green-500">
+                      Healthier Choices Spotted <span className="pl-2">🥬</span>
+                    </p>
+                  ) : (
+                    <div className="flex items-center text-red-500">
+                      <p>Choose Healthier Options</p>
+                      <span className="animate-ping pl-2">
+                        <IoIosWarning />
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
 
+              <div className="w-10/12 rounded-2xl bg-gray-100 p-6">
+                {receiptData.lineItems.length > 0 ? (
+                  <ul className="list-none divide-y-2 divide-gray-200 leading-8">
+                    {receiptData?.lineItems?.map((item: string) => (
+                      <li key={item} className="p-2">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="flex min-h-[300px] flex-col items-center gap-8">
+                    <IoIosWarning
+                      color="orange"
+                      size="150"
+                      className="my-12 animate-ping"
+                    />
+                    <p>
+                      <span className="font-bold">Sorry,</span> something went
+                      wrong. Please try again!
+                    </p>
+                  </div>
+                )}
+              </div>
               <div className="flex gap-8">
                 <Button
-                  variant="outline"
+                  variant={disabledCondition ? "destructive" : "outline"}
                   onClick={() => setSelected(TabsEnum.SCAN)}
                   size="lg"
                 >
                   Retake
                 </Button>
-                <Button variant="blue" onClick={handleSubmission} size="lg">
+                <Button
+                  variant="blue"
+                  onClick={handleSubmission}
+                  size="lg"
+                  disabled={disabledCondition}
+                >
                   Submit
                 </Button>
               </div>
