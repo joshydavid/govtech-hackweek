@@ -14,6 +14,7 @@ export default function Entry({ children }: EntryProps) {
   const [openCamera, setOpenCamera] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>(tabs[0].label);
   const [image, setImage] = useState<string>(tabs[0].label);
+  const [receiptData, setReceiptData] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [userInfo, setUserInfo] = useState<string>();
   const pathname = usePathname();
@@ -42,6 +43,8 @@ export default function Entry({ children }: EntryProps) {
         setImage,
         capturedImage,
         setCapturedImage,
+        receiptData,
+        setReceiptData,
       }}
     >
       {pathname === LOGIN_PAGE ? <>{children}</> : <>{children}</>}

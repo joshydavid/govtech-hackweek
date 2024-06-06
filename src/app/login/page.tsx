@@ -14,7 +14,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen w-screen items-center justify-center">
+    <div className="flex max-h-screen w-screen items-center justify-center">
       <Button size="lg" onClick={handleLogin}>
         Continue with
         <Image

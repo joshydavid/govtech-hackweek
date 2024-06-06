@@ -10,4 +10,6 @@ export const NavigationContext = createContext<any>({
   setUserInfo: () => {},
   capturedImage: null,
   setCapturedImage: () => {},
+  receiptData: {},
+  setReceiptData: () => {},
 });
