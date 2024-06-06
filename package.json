@@ -10,6 +10,7 @@
     "prettier": "npx prettier . --write"
   },
   "dependencies": {
+    "@govtechsg/sgds-web-component": "^1.2.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@vercel/blob": "^0.23.3",
