@@ -5,7 +5,7 @@ import HeroThree from "~/how-it-works/landing-hero-03.svg";
 export const HowItWorks = [
   {
     id: 1,
-    instruction: "Purchase healthy products",
+    instruction: "Purchase products with the healthier choice symbol",
     image: HeroOne,
   },
   {

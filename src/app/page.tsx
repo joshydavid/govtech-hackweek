@@ -54,14 +54,14 @@ export default function Home() {
               </div>
             </div>
 
-            <h3 className="my-8 pl-8 font-bold">How it works</h3>
+            <h3 className="my-8 pl-8 font-semibold">How it works</h3>
             <div className="flex flex-col gap-12 px-8 pb-28 lg:flex-row lg:justify-evenly lg:gap-4 lg:p-12 lg:pb-60">
               {HowItWorks.map(({ id, instruction, image }) => (
                 <div
-                  className="flex flex-col items-start justify-center gap-3 rounded-lg bg-white p-8 text-center"
+                  className="flex flex-col items-start justify-start gap-6 rounded-3xl bg-white p-12 text-left"
                   key={id}
                 >
-                  <div className="mb-4 flex min-h-[200px] justify-center">
+                  <div className="flex max-h-[200px] justify-start">
                     <Image src={image} alt={String(id)} />
                   </div>
                   <p className="text-body">{instruction}</p>
@@ -83,7 +83,9 @@ export default function Home() {
       case TabsEnum.REWARDS:
         return (
           <div className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-center text-sm font-semibold text-white">
-            <p className="pb-2">Hey 👋🏻,</p>
+            <p className={cn(userInfo && "pb-2")}>
+              {userInfo ? "Hey 👋🏻," : "Hey there!"}
+            </p>
             <p>{userInfo}</p>
           </div>
         );
@@ -120,7 +122,7 @@ export default function Home() {
               )}
 
               <div className="w-10/12 rounded-2xl bg-gray-100 p-6">
-                {receiptData.lineItems.length > 0 ? (
+                {receiptData?.lineItems?.length > 0 ? (
                   <ul className="list-none divide-y-2 divide-gray-200 leading-8">
                     {receiptData?.lineItems?.map((item: string) => (
                       <li key={item} className="p-2">
