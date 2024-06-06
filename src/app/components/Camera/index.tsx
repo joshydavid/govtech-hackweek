@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useContext, useRef, useState } from "react";
 import { Camera as ReactCamera } from "react-camera-pro";
 import { MdDelete } from "react-icons/md";
+import { RxCross1 } from "react-icons/rx";
 
 export default function Camera() {
   const camera = useRef<any>(null);
@@ -41,9 +42,14 @@ export default function Camera() {
           </div>
           <div className="border-1 relative z-10 h-14 w-14 rounded-full border-2 border-black bg-white"></div>
         </div>
-        <p className="text-sm text-white" onClick={handleReset}>
-          Cancel
-        </p>
+
+        <div className="flex justify-end" onClick={handleReset}>
+          <RxCross1
+            size={50}
+            onClick={() => setImage(null)}
+            className="rounded-2xl bg-red-500 p-3 text-white"
+          />
+        </div>
       </>
     );
   };
@@ -74,11 +80,12 @@ export default function Camera() {
           ref={camera}
           errorMessages={errMessages}
           facingMode="environment"
+          aspectRatio="cover"
         />
       ) : (
         <Image src={image} alt="Photo" fill={true} />
       )}
-      <div className="fixed bottom-0 mx-auto grid w-full grid-cols-3 items-center justify-center bg-black p-8 text-center">
+      <div className="fixed bottom-0 mx-auto grid w-full grid-cols-3 items-center justify-center p-8 text-center">
         <span></span>
         {!image ? (
           <>{renderCaptureAndCancelButton()}</>

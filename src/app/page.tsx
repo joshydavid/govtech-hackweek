@@ -11,6 +11,7 @@ import { NavigationContext } from "./context/NavigationContext";
 export default function Home() {
   const { selected, setSelected } = useContext(NavigationContext);
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
+  const { userInfo } = useContext(NavigationContext);
 
   useEffect(() => {
     if (selected === TabsEnum.SCAN) {
@@ -23,7 +24,7 @@ export default function Home() {
       case TabsEnum.REWARDS:
         return (
           <>
-            <div className="grid h-fit w-screen grid-cols-2 gap-4 divide-x bg-white p-4 text-center">
+            <div className="mt-4 grid h-fit w-screen grid-cols-2 gap-4 divide-x bg-white p-6 text-center">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-center gap-2">
                   <p className="font-bold">325</p>
@@ -56,9 +57,10 @@ export default function Home() {
     switch (selected) {
       case TabsEnum.REWARDS:
         return (
-          <h1 className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-center text-xl font-semibold text-white">
-            {TabsEnum.REWARDS}
-          </h1>
+          <div className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-center text-sm font-semibold text-white">
+            <p className="pb-2">Hey 👋🏻,</p>
+            <p>{userInfo}</p>
+          </div>
         );
       case TabsEnum.VERIFICATION:
         return (

@@ -6,4 +6,6 @@ export const NavigationContext = createContext<any>({
   setOpenCamera: () => {},
   selected: tabs[0].label,
   setSelected: () => {},
+  userInfo: "",
+  setUserInfo: () => {},
 });

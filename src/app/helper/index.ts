@@ -7,4 +7,9 @@ const fetcher = async (url: string) => {
   return response.data;
 };
 
-export { fetcher };
+const backendAxiosGet = async (url: string) => {
+  const response = await axios.get(url);
+  return response.data;
+};
+
+export { backendAxiosGet, fetcher };
