@@ -2,6 +2,7 @@
 
 import Tabs from "@/components/Tabs";
 import { TabsEnum, tabs } from "@/models/tabs";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { FaGift, FaHeart } from "react-icons/fa";
@@ -9,29 +10,8 @@ import { Button } from "./components/Button";
 import Camera from "./components/Camera";
 import { REWARD_PAGE } from "./constant";
 import { NavigationContext } from "./context/NavigationContext";
+import { HowItWorks } from "./data/howItWorks";
 import { cn } from "./lib/utils";
-import HeroOne from "~/how-it-works/landing-hero-01.svg";
-import HeroTwo from "~/how-it-works/landing-hero-02.svg";
-import HeroThree from "~/how-it-works/landing-hero-03.svg";
-import Image from "next/image";
-
-export const HowItWorks = [
-  {
-    id: 1,
-    instruction: "Purchase healthy products",
-    image: HeroOne,
-  },
-  {
-    id: 2,
-    instruction: "Scan the receipt to earn points",
-    image: HeroTwo,
-  },
-  {
-    id: 3,
-    instruction: "Redeem rewards with your points",
-    image: HeroThree,
-  },
-];
 
 export default function Home() {
   const { selected, setSelected } = useContext(NavigationContext);
