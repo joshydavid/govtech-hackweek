@@ -82,11 +82,8 @@ export default function Home() {
     switch (selected) {
       case TabsEnum.REWARDS:
         return (
-          <div className="fixed top-[28px] z-10 w-screen bg-blue-500 px-6 py-8 text-center text-sm font-semibold text-white">
-            <p className={cn(userInfo && "pb-2")}>
-              {userInfo ? "Hey 👋🏻," : "Hey there!"}
-            </p>
-            <p>{userInfo}</p>
+          <div className="fixed top-[28px] z-10 w-screen bg-blue-500 px-6 py-8 text-left text-sm font-semibold text-white">
+            <p>{userInfo ? `Hey, ${userInfo} 👋🏻` : "Hey, Guest 👋🏻"}</p>
           </div>
         );
       case TabsEnum.VERIFICATION:

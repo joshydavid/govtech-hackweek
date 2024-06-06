@@ -3,8 +3,8 @@
 import { Button } from "@/components/Button";
 import { fetcher } from "@/helper";
 import Image from "next/image";
-import Singpass from "~/singpass.svg";
 import People from "~/people.svg";
+import Singpass from "~/singpass.svg";
 
 export default function Login() {
   const handleLogin = async () => {
@@ -22,15 +22,17 @@ export default function Login() {
           <h1 className="animate-pulse text-xl font-semibold">
             Buy Scan Redeem
           </h1>
-          <Button size="lg" onClick={handleLogin}>
-            Continue with
-            <Image
-              src={Singpass}
-              alt="Singpass"
-              width={80}
-              className="ml-1 mt-1.5"
-            />
-          </Button>
+          <div>
+            <Button size="lg" onClick={handleLogin}>
+              Continue with
+              <Image
+                src={Singpass}
+                alt="Singpass"
+                width={80}
+                className="ml-1 mt-1.5"
+              />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
