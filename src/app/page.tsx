@@ -5,9 +5,9 @@ import Tabs from "@/components/Tabs";
 import { logos } from "@/data/logos";
 import { TabsEnum, tabs } from "@/models/tabs";
 import { useContext, useEffect } from "react";
+import { Button } from "./components/Button";
 import Camera from "./components/Camera";
 import { NavigationContext } from "./context/NavigationContext";
-import { Button } from "./components/Button";
 
 export default function Home() {
   const { selected, setSelected } = useContext(NavigationContext);
