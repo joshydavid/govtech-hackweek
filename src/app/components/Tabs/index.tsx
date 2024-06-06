@@ -20,7 +20,7 @@ interface TabProp {
 
 const Tabs = ({ tabsMapping, selected, setSelected }: TabsProps) => {
   return (
-    <div className="flex w-screen items-center justify-center gap-12 bg-gray-100 p-4">
+    <div className="flex w-screen items-center justify-center gap-12 border-t-2 bg-white p-4">
       {tabsMapping
         .slice(0, tabsMapping.length - 1)
         .map(({ label, icon }: TabsType, index: number) => {
