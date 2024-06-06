@@ -10,7 +10,7 @@ export default function Login() {
     const response = await fetcher(
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/${process.env.NEXT_PUBLIC_AUTH}`,
     );
-    window.location.href = response.url;
+    window.location.href = response;
   };
 
   return (
