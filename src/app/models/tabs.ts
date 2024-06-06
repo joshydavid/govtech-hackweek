@@ -3,7 +3,6 @@ import { TbGift, TbScan, TbUser } from "react-icons/tb";
 export enum TabsEnum {
   REWARDS = "Rewards",
   SCAN = "Scan",
-  PROFILE = "Profile",
   VERIFICATION = "Verification",
 }
 
@@ -20,10 +19,6 @@ export const tabs: TabsType[] = [
   {
     label: TabsEnum.SCAN,
     icon: TbScan,
-  },
-  {
-    label: TabsEnum.PROFILE,
-    icon: TbUser,
   },
   {
     label: TabsEnum.VERIFICATION,

@@ -26,7 +26,7 @@ export default function Camera() {
 
   const handleSubmit = () => {
     setOpenCamera(false);
-    setSelected(tabs[3].label);
+    setSelected(tabs[2].label);
   };
 
   const renderCaptureAndCancelButton = () => {
