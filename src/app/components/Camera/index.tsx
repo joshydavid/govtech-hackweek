@@ -109,7 +109,7 @@ export default function Camera() {
 
   return (
     <div className="mx-auto flex max-h-screen w-screen flex-col justify-center bg-black">
-      <div className="fixed top-0 z-10 mx-auto grid w-full grid-cols-3 items-center justify-center bg-black p-8 text-center"></div>
+      <div className="fixed top-0 z-20 mx-auto grid w-full grid-cols-3 items-center justify-center bg-black p-8 text-center"></div>
       {!image ? (
         <ReactCamera
           ref={camera}

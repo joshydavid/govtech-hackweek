@@ -16,7 +16,7 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen w-screen flex-col items-start justify-start gap-4 lg:mb-24">
-      <div className="mt-28">
+      <div className="mt-16">
         <Image src={People} alt="phone" width={800} height={500} />
         <div className="flex flex-col gap-3 px-8">
           <h1 className="animate-pulse text-xl font-semibold">
