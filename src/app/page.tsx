@@ -11,6 +11,7 @@ import { NavigationContext } from "./context/NavigationContext";
 export default function Home() {
   const { selected, setSelected } = useContext(NavigationContext);
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
+  const { capturedImage } = useContext(NavigationContext);
   const { userInfo } = useContext(NavigationContext);
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Home() {
             <h1 className="h1-special">{TabsEnum.VERIFICATION}</h1>
             <div className="mt-20 flex pl-6">
               {/* render info here */}
+              {capturedImage}
               <Button onClick={() => setSelected(TabsEnum.SCAN)}>Retake</Button>
             </div>
           </div>

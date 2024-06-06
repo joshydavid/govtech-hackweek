@@ -11,6 +11,7 @@ import { RxCross1 } from "react-icons/rx";
 export default function Camera() {
   const camera = useRef<any>(null);
   const [image, setImage] = useState(null);
+  const { setCapturedImage } = useContext(NavigationContext);
   const { setSelected } = useContext(NavigationContext);
   const { setOpenCamera } = useContext(NavigationContext);
 
@@ -23,6 +24,7 @@ export default function Camera() {
   const handleCamera = () => {
     const capture = camera.current.takePhoto();
     setImage(capture);
+    setCapturedImage(capture);
   };
 
   const handleSubmit = () => {

@@ -8,4 +8,6 @@ export const NavigationContext = createContext<any>({
   setSelected: () => {},
   userInfo: "",
   setUserInfo: () => {},
+  capturedImage: null,
+  setCapturedImage: () => {},
 });
