@@ -135,7 +135,7 @@ export default function Home() {
               )}
             >
               {receiptData?.lineItems?.length > 0 && (
-                <div className="font-semibold">
+                <div className="mt-8 font-semibold">
                   {receiptData?.acceptedLineItems?.length > 0 ? (
                     <p className="animate-bounce text-green-500">
                       Healthier Choices Spotted <span className="pl-2">🥬</span>
@@ -151,7 +151,7 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="mt-12 w-10/12 rounded-2xl bg-gray-100 p-6">
+              <div className="w-10/12 rounded-2xl bg-gray-100 p-6">
                 {receiptData?.lineItems?.length > 0 ? (
                   <ul className="list-none divide-y-2 divide-gray-200 leading-8">
                     {receiptData?.lineItems?.map(
