@@ -1,5 +1,6 @@
 "use client";
 
+import { useUser } from "@/api/user";
 import Tabs from "@/components/Tabs";
 import { TabsEnum, tabs } from "@/models/tabs";
 import Image from "next/image";
@@ -7,20 +8,29 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { FaGift, FaHeart } from "react-icons/fa";
 import { IoIosWarning } from "react-icons/io";
-import { Button } from "./components/Button";
-import Camera from "./components/Camera";
-import { Achievement, REWARD_PAGE } from "./constant";
-import { NavigationContext } from "./context/NavigationContext";
-import { HowItWorks } from "./data/howItWorks";
-import { cn } from "./lib/utils";
+import ClipLoader from "react-spinners/ClipLoader";
+import { Button } from "../components/Button";
+import Camera from "../components/Camera";
+import { Achievement, REWARD_PAGE } from "../constant";
+import { NavigationContext } from "../context/NavigationContext";
+import { HowItWorks } from "../data/howItWorks";
+import { cn } from "../lib/utils";
 
 export default function Home() {
   const [achievement, setAchievements] = useState({ stamps: 0, points: 0 });
   const { selected, setSelected } = useContext(NavigationContext);
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
-  const { userInfo } = useContext(NavigationContext);
   const { receiptData } = useContext(NavigationContext);
   const router = useRouter();
+
+  const [userInfo, setUserInfo] = useState<string>();
+  const { data, error, isLoading } = useUser();
+
+  useEffect(() => {
+    if (data) {
+      setUserInfo(data.userName);
+    }
+  }, [data, error, isLoading]);
 
   const handleSubmission = () => {
     router.push(REWARD_PAGE);
@@ -43,6 +53,15 @@ export default function Home() {
       setOpenCamera(true);
     }
   }, [selected, setOpenCamera]);
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center gap-4">
+        <ClipLoader size={40} />
+        <h1 className="text-2xl font-semibold">Loading...</h1>
+      </div>
+    );
+  }
 
   const renderContent = () => {
     switch (selected) {
