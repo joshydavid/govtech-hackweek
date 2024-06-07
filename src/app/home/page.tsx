@@ -154,11 +154,14 @@ export default function Home() {
               <div className="w-10/12 rounded-2xl bg-gray-100 p-6">
                 {receiptData?.lineItems?.length > 0 ? (
                   <ul className="list-none divide-y-2 divide-gray-200 leading-8">
-                    {receiptData?.lineItems?.map((item: string) => (
-                      <li key={item} className="p-2">
-                        {item}
-                      </li>
-                    ))}
+                    {receiptData?.lineItems?.map(
+                      ({ description, amount }: any, i: number) => (
+                        <li key={i} className="flex p-2">
+                          {description ?? `Item ${i + 1}`} - $
+                          {amount.toFixed(2)}
+                        </li>
+                      ),
+                    )}
                   </ul>
                 ) : (
                   <div className="flex min-h-[300px] flex-col items-center gap-8">
