@@ -4,17 +4,18 @@ import Tabs from "@/components/Tabs";
 import { TabsEnum, tabs } from "@/models/tabs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaGift, FaHeart } from "react-icons/fa";
 import { IoIosWarning } from "react-icons/io";
 import { Button } from "./components/Button";
 import Camera from "./components/Camera";
-import { REWARD_PAGE } from "./constant";
+import { Achievement, REWARD_PAGE } from "./constant";
 import { NavigationContext } from "./context/NavigationContext";
 import { HowItWorks } from "./data/howItWorks";
 import { cn } from "./lib/utils";
 
 export default function Home() {
+  const [achievement, setAchievements] = useState({ stamps: 0, points: 0 });
   const { selected, setSelected } = useContext(NavigationContext);
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
   const { userInfo } = useContext(NavigationContext);
@@ -24,6 +25,18 @@ export default function Home() {
   const handleSubmission = () => {
     router.push(REWARD_PAGE);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stamps = localStorage.getItem(Achievement.STAMPS);
+      const points = localStorage.getItem(Achievement.POINTS);
+      setAchievements({
+        ...achievement,
+        stamps: Number(stamps),
+        points: Number(points),
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (selected === TabsEnum.SCAN) {
@@ -39,7 +52,7 @@ export default function Home() {
             <div className="mt-4 grid h-fit w-screen grid-cols-2 gap-4 divide-x bg-white p-6 text-center">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-center gap-2">
-                  <p className="font-bold">325</p>
+                  <p className="font-bold">{achievement?.points ?? 0}</p>
                   <FaHeart color="red" />
                 </div>
                 <p className="text-sm">My Healthpoints</p>
@@ -47,10 +60,10 @@ export default function Home() {
 
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-center gap-2">
-                  <p className="font-bold">0</p>
+                  <p className="font-bold">{achievement?.stamps ?? 0}</p>
                   <FaGift color="green" />
                 </div>
-                <p className="text-sm">My Rewards</p>
+                <p className="text-sm">My Stamps</p>
               </div>
             </div>
 

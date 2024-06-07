@@ -6,6 +6,7 @@ import { useUser } from "./api/user";
 import { LOGIN_PAGE } from "./constant";
 import { NavigationContext } from "./context/NavigationContext";
 import { tabs } from "./models/tabs";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface EntryProps {
   children: ReactNode;
@@ -28,7 +29,12 @@ export default function Entry({ children }: EntryProps) {
   }, [data, error, isLoading]);
 
   if (isLoading) {
-    return "Loading...";
+    return (
+      <div className="flex min-h-screen items-center justify-center gap-4">
+        <ClipLoader size={40} />
+        <h1 className="text-2xl font-semibold">Loading...</h1>
+      </div>
+    );
   }
 
   return (

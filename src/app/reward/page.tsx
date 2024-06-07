@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { LANDING_PAGE } from "@/constant";
+import { Achievement, LANDING_PAGE } from "@/constant";
 import { NavigationContext } from "@/context/NavigationContext";
 import { tabs } from "@/models/tabs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import star from "~/star.png";
 
@@ -22,6 +22,13 @@ export default function Reward() {
   const { receiptData } = useContext(NavigationContext);
   const acceptedItemsCount = receiptData?.acceptedLineItems?.length ?? 10;
   const points = acceptedItemsCount * 5;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(Achievement.STAMPS, acceptedItemsCount.toString());
+      localStorage.setItem(Achievement.POINTS, points.toString());
+    }
+  });
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
