@@ -122,7 +122,7 @@ export default function Home() {
       case TabsEnum.VERIFICATION:
         return (
           <div>
-            <div className="fixed top-0 z-10 w-screen bg-blue-500 px-6 py-8 text-left text-lg font-semibold text-white">
+            <div className="fixed top-[28px] z-10 w-screen bg-blue-500 px-6 py-8 text-left text-lg font-semibold text-white">
               {receiptData?.lineItems?.length > 0 ? (
                 <p>My Purchases</p>
               ) : (
@@ -151,7 +151,7 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="w-10/12 rounded-2xl bg-gray-100 p-6">
+              <div className="mt-12 w-10/12 rounded-2xl bg-gray-100 p-6">
                 {receiptData?.lineItems?.length > 0 ? (
                   <ul className="list-none divide-y-2 divide-gray-200 leading-8">
                     {receiptData?.lineItems?.map(
