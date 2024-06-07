@@ -1,7 +1,13 @@
 "use client";
 
 import { useUser } from "@/api/user";
+import { Button } from "@/components/Button";
+import Camera from "@/components/Camera";
 import Tabs from "@/components/Tabs";
+import { Achievement, LOGIN_PAGE, REWARD_PAGE } from "@/constant";
+import { NavigationContext } from "@/context/NavigationContext";
+import { HowItWorks } from "@/data/howItWorks";
+import { cn } from "@/lib/utils";
 import { TabsEnum, tabs } from "@/models/tabs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,26 +15,21 @@ import { useContext, useEffect, useState } from "react";
 import { FaGift, FaHeart } from "react-icons/fa";
 import { IoIosWarning } from "react-icons/io";
 import ClipLoader from "react-spinners/ClipLoader";
-import { Button } from "../components/Button";
-import Camera from "../components/Camera";
-import { Achievement, REWARD_PAGE } from "../constant";
-import { NavigationContext } from "../context/NavigationContext";
-import { HowItWorks } from "../data/howItWorks";
-import { cn } from "../lib/utils";
+import NotAuthorised from "~/unauthorised.svg";
 
 export default function Home() {
   const [achievement, setAchievements] = useState({ stamps: 0, points: 0 });
   const { selected, setSelected } = useContext(NavigationContext);
   const { openCamera, setOpenCamera } = useContext(NavigationContext);
   const { receiptData } = useContext(NavigationContext);
-  const router = useRouter();
-
   const [userInfo, setUserInfo] = useState<string>();
+  const router = useRouter();
   const { data, error, isLoading } = useUser();
 
   useEffect(() => {
-    if (data) {
+    if (typeof window !== "undefined" && data) {
       setUserInfo(data.userName);
+      localStorage.setItem("user", data.userName);
     }
   }, [data, error, isLoading]);
 
@@ -199,17 +200,43 @@ export default function Home() {
 
   return (
     <main className="relative flex min-h-screen flex-col items-center overflow-hidden p-8">
-      <div className="flex w-screen">{renderHeader()}</div>
-      <div className="mt-16 flex-grow bg-gray-100">{renderContent()}</div>
-      <div className="fixed bottom-0 flex w-full justify-center">
-        {!openCamera && selected !== TabsEnum.VERIFICATION && (
-          <Tabs
-            tabsMapping={tabs}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        )}
-      </div>
+      {data?.userName ? (
+        <>
+          <div className="flex w-screen">{renderHeader()}</div>
+          <div className="mt-16 flex-grow bg-gray-100">{renderContent()}</div>
+          <div className="fixed bottom-0 flex w-full justify-center">
+            {!openCamera && selected !== TabsEnum.VERIFICATION && (
+              <Tabs
+                tabsMapping={tabs}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="flex min-h-screen w-screen flex-col items-center justify-center">
+          <Image src={NotAuthorised} alt="lost" width={500} height={300} />
+          <div className="flex w-10/12 flex-col gap-6">
+            <div className="mt-12 flex flex-col gap-2">
+              <h1 className="font-semibold">Error 401</h1>
+              <h1 className="font-semibold">Not Logged In</h1>
+              <h1 className="font-normal">
+                Please verify your identify by logging in.
+              </h1>
+            </div>
+            <div>
+              <Button
+                variant="blue"
+                size="lg"
+                onClick={() => router.push(LOGIN_PAGE)}
+              >
+                Login
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
