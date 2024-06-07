@@ -157,8 +157,8 @@ export default function Home() {
                     {receiptData?.lineItems?.map(
                       ({ description, amount }: any, i: number) => (
                         <li key={i} className="flex p-2">
-                          {description ?? `Item ${i + 1}`} - $
-                          {amount?.toFixed(2)}
+                          {description ?? `Item ${i + 1}`}{" "}
+                          {amount && <> - ${amount?.toFixed(2)}</>}
                         </li>
                       ),
                     )}
