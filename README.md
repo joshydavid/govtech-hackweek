@@ -54,7 +54,7 @@ BLOB_READ_WRITE_TOKEN={BLOB_READ_WRITE_TOKEN}
 
 ## Acknowledgement <img class=" lazyloaded" src="https://github.com/Tarikul-Islam-Anik/Microsoft-Teams-Animated-Emojis/blob/master/Emojis/Activities/Party%20Popper.png?raw=true" alt="Party Popper" title="Party Popper" width="31" height="31">
 
-- Graphics: [OGP Build Your Own Singapore](https://string.beta.gov.sg/09a21fa501cc4ab0adea9575b34216ba)
+- Graphics: [OGP Build Your Own Singaporean](https://string.beta.gov.sg/09a21fa501cc4ab0adea9575b34216ba)
 - Problem statement contributor: [Health Promotion Board](https://hpb.gov.sg)
 - Developed by GovTech 2024 Interns,
   - [Joshua](https://www.linkedin.com/in/joshuadavidang/), Software Engineer Intern @ CrowdTaskSG,
