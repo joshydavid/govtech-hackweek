@@ -158,7 +158,7 @@ export default function Home() {
                       ({ description, amount }: any, i: number) => (
                         <li key={i} className="flex p-2">
                           {description ?? `Item ${i + 1}`} - $
-                          {amount.toFixed(2)}
+                          {amount?.toFixed(2)}
                         </li>
                       ),
                     )}
