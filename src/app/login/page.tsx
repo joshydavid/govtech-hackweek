@@ -1,14 +1,14 @@
 "use client";
 
+import { backendAxiosGet } from "@/api";
 import { Button } from "@/components/Button";
-import { fetcher } from "@/helper";
 import Image from "next/image";
 import People from "~/people.svg";
 import Singpass from "~/singpass.svg";
 
 export default function Login() {
   const handleLogin = async () => {
-    const response = await fetcher(
+    const response = await backendAxiosGet(
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/${process.env.NEXT_PUBLIC_AUTH}`,
     );
     window.location.href = response;
