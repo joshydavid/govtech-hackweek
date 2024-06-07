@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import star from "~/star.png";
+import cross from "~/cross.png";
 
 export default function Reward() {
   const { setSelected } = useContext(NavigationContext);
@@ -20,7 +21,7 @@ export default function Reward() {
   };
 
   const { receiptData } = useContext(NavigationContext);
-  const acceptedItemsCount = receiptData?.acceptedLineItems?.length ?? 10;
+  const acceptedItemsCount = receiptData?.acceptedLineItems?.length ?? 0;
   const points = acceptedItemsCount * 5;
 
   useEffect(() => {
@@ -32,18 +33,38 @@ export default function Reward() {
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
-      <h1 className="text-3xl font-bold">Amazing!</h1>
-      <Image src={star} width={250} height={250} alt="star" />
-      <h1 className="text-lg font-semibold">
-        You've earned {acceptedItemsCount} grocery stamps!
+      <h1 className="text-3xl font-bold">
+        {receiptData?.acceptedLineItems?.length > 0 ? "Amazing!" : "Sorry!"}
       </h1>
 
-      <div className="mt-2 flex w-10/12 gap-4 text-end">
-        <div className="flex w-screen items-center justify-end gap-2 rounded-md bg-gray-100 p-4">
-          {points} <FaHeart color="red" />
+      {receiptData?.acceptedLineItems?.length > 0 ? (
+        <Image src={star} width={250} height={250} alt="star" />
+      ) : (
+        <Image src={cross} width={150} height={150} alt="star" />
+      )}
+
+      {receiptData?.acceptedLineItems?.length > 0 ? (
+        <h1 className="text-lg font-semibold">
+          You've earned {acceptedItemsCount} grocery stamps!
+        </h1>
+      ) : (
+        <h1 className="text-lg font-semibold">
+          <h1 className="text-lg font-semibold">
+            No eligible purchases were identified.
+          </h1>
+        </h1>
+      )}
+
+      {receiptData?.acceptedLineItems?.length > 0 && (
+        <div className="mt-2 flex w-10/12 gap-4 text-end">
+          <div className="flex w-screen items-center justify-end gap-2 rounded-md bg-gray-100 p-4">
+            {points} <FaHeart color="red" />
+          </div>
+          <div className="w-screen rounded-md bg-gray-100 p-4">
+            Healthpoints
+          </div>
         </div>
-        <div className="w-screen rounded-md bg-gray-100 p-4">Healthpoints</div>
-      </div>
+      )}
 
       <Button
         variant="blue"
@@ -51,7 +72,7 @@ export default function Reward() {
         onClick={handleGoHome}
         className="mt-4 w-10/12"
       >
-        Yay
+        {receiptData?.acceptedLineItems?.length > 0 ? "Yay" : "Oops... Go Home"}
       </Button>
     </div>
   );
